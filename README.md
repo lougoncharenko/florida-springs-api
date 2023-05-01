@@ -1,32 +1,20 @@
-# API Testing Challenges
+# Florida Springs API
 
-Clone this repository, then run `npm install` to install all necessary packages.
+## Usage
+- Clone this repository
+- run `npm install` to install all necessary packages.
 
-Complete all TODOs in `src/routes/message.js` and `src/test/message.js`. Then, run your tests to ensure that they pass.
 
-Submit your code using [Gradescope](https://gradescope.com).
+## API Endpoints:
 
-## Endpoints:
-
-#### Messages (TODOs)
+### Springs
 
 | Route | Method | Description |
 | ----------- | ----------- | ----------- |
-|http://localhost:3000/messages |GET | Gets all messagess |
-|http://localhost:3000/messages/{messageId} |GET | Get one message by id|
-|http://localhost:3000/messages | POST | add a new message |
-|http://localhost:3000/messages/{messageId}| PUT | update an exisiting message|
-|http://localhost:3000/messages/{messageId} | DELETE | delete a message |
+|http://localhost:3000/springs |GET | Gets all springs |
+|http://localhost:3000/springs/{springId} |GET | Get one spring by id|
+|http://localhost:3000/springs | POST | add a new spring |
+|http://localhost:3000/springs/{springId}| PUT | update an exisiting spring|
+|http://localhost:3000/springs/{springId} | DELETE | delete a spring |
 
-{messageId} = Route parameter = `:messageId`
-#### Users
-
-| Route | Method  | Description |
-| ----------- | ----------- | ----------- |
-|http://localhost:3000/users/ | GET | get all users |
-|http://localhost:3000/users/{userId} |GET | Get one user by id|
-|http://localhost:3000/users | POST | add a new user to the database |
-|http://localhost:3000/users/{userId}| PUT | update an exisiting user|
-|http://localhost:3000/users/{userId} | DELETE | delete a user |
-
-{userId} = Route parameter = `:userId`
+{springId} = Route parameter = `:springId`
