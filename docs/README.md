@@ -17,3 +17,16 @@ The purpose of this API is to fetch data related to springs in Florida
 |http://localhost:3000/springs/{springId} | DELETE | delete a spring |
 
 {springId} = Route parameter = `:springId`
+
+### Authentication
+
+| Route | Method | Description |
+| ----------- | ----------- | ----------- |
+|http://localhost:3000/users |POST | Gets all users |
+|http://localhost:3000/sign-up |POST | User signs up for API key |
+|http://localhost:3000/springs | POST | add a new spring |
+|http://localhost:3000/springs/{springId}| PUT | update an exisiting spring|
+|http://localhost:3000/springs/{springId} | DELETE | delete a spring |
+
+{springId} = Route parameter = `:springId`
+
