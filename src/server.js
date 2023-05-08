@@ -16,11 +16,15 @@ app.use((req, res, next) => {
 })
 
 // Database Setup
-require('./config/db-setup.js')
+require('./config/db-setup.js');
+
+//Middleware
+const checkAuth = require('./middleware/checkAuth');
 
 // Routes
-const router = require('./routes/index.js')
-app.use(router)
+const router = require('./routes/index.js');
+app.use(router);
+app.use(checkAuth);
 
 // Start Server
 app.listen(process.env.PORT, () => {
