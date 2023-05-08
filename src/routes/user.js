@@ -16,16 +16,21 @@ router.post('/sign-up', async (req, res) => {
     try {
       // Create User
       const user = await new User(req.body);
-      const savedUser = await user.save();
+      await user.save();
+      const existingUser = await User.findOne({ username });
+
+      if (existingUser) {
+        return res.status(409).json({ message: 'User already exists' });
+      }
+ 
       const token = await jwt.sign(
         { _id: user._id }, 
         process.env.SECRET, 
         { expiresIn: '60 days' });
       res.cookie('nToken', token, { maxAge: 900000, httpOnly: true });
-      return res.redirect('/login');
+      res.status(201).json({ message: 'User created successfully'});
     } catch(err) {
-      console.log(err.message);
-      return res.status(400).send({ err });
+      res.status(500).json({ message: err.message });
     }
   });
   // LOGOUT
