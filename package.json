@@ -5,7 +5,8 @@
   "main": "server.js",
   "scripts": {
     "start": "nodemon src/server.js",
-    "test": "mocha src/test"
+    "test": "mocha src/test",
+    "seed": "node src/config/seed.js"
   },
   "author": "",
   "license": "ISC",

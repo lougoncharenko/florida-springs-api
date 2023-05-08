@@ -1,5 +1,6 @@
 const express = require('express')
 const router = express.Router();
+const springs = require('../data/Springs')
 
 //models
 const Spring = require('../models/spring')

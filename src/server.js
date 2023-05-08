@@ -17,6 +17,7 @@ app.use((req, res, next) => {
 
 // Database Setup
 require('./config/db-setup.js')
+require('./config/seed')
 
 // Routes
 const router = require('./routes/index.js')
