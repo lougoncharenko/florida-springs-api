@@ -1,5 +1,18 @@
 # Florida Springs API
 
+
+## About the Project:
+
+|       |                                                                                                                                                                                                     |
+| ----- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| About | An API about allows users to fetch, post, update and delete data about springs  in Florida.                                                                           |
+| Author  | [Louisa Goncharenko](https://github.com/lougoncharenko) |
+| Goal  | Build an API using node, mongoDB and express.                                                                                            |
+|       |                                                                                                                                                                                                     |
+
+## API Documentation:
+[Florida Springs API documentation]()
+
 ## Usage
 - Clone this repository
 - run `npm install` to install all necessary packages.
