@@ -7,57 +7,67 @@ const router = express.Router();
 //models
 const User = require('../models/user');
 
+//  Route to get all users.
+router.get('/', async (req, res) => {
+  try {
+      const users = await User.find();
+      return res.json({ users });
+  } catch (err) {
+      res.status(500).json({ error: err.message })
+  }
+})
 
 // SIGNUP
-router.post('/sign-up', async (req, res) => {
+router.post('/signup', async (req, res) => {
+
+  const { username, password } = req.body;
+  const userExists = await User.findOne({ username }, 'username, password');
   try {
-    // Create User
-    const user = new User(req.body);
-    await user.save();
-    // Create JWT token
-    const token = jwt.sign({ _id: user._id }, process.env.SECRET, { expiresIn: "60 days" });
-    // Set cookie
-    res.cookie('nToken', token, { maxAge: 900000, httpOnly: true });
-    res.redirect('/');
-    res.status(201).json({ message: 'User created successfully'});
-  } catch (err) {
-    res.status(500).json({ message: err.message });
+      if (userExists) {
+          return res.status(400).json({ error: 'Username already exists' });
+      }
+      const user = await User.create({ username, password: password });
+      const token = jwt.sign({ _id: user._id, username: user.username }, process.env.SECRET, {
+          expiresIn: "60 days"
+      });
+      res.cookie('nToken', token, { maxAge: 900000, httpOnly: true });
+      res.status(201).json({ message: "User created", token });
+  } 
+  catch (err) {
+      res.status(500).json({ error: err.message })
   }
 });
 
 // LOGIN
 router.post('/login', async (req, res) => {
-  const { email, password } = req.body;
+  const { username, password } = req.body;
   try {
-    // Find this user email
-    const user = await User.findOne({ email }, 'email password');
-    if (!user) {
-      // User not found
-      return res.status(401).send({ message: 'Wrong email or Password' });
-    }
-    // Check the password
-    user.comparePassword(password, (err, isMatch) => {
-      if (!isMatch) {
-        // Password does not match
-        return res.status(401).send({ message: 'Wrong email or password' });
+      // check if user exists
+      const user = await User.findOne({ username }, 'username password');
+      if (!user) {
+          return res.status(401).json({ error: 'Incorrect username or password.' });
       }
-      // Create a token
-      const token = jwt.sign({ _id: user._id, email: user.email }, process.env.SECRET, {
-        expiresIn: '60 days',
+      // check if password matches
+      const passwordMatch = await user.comparePassword(password);
+      if (!passwordMatch) {
+          return res.status(401).json({ error: 'Incorrect username or password.' });
+      }
+      // create token
+      const token = jwt.sign({ _id: user._id, username: user.username }, process.env.SECRET, {
+          expiresIn: "60 days"
       });
-      // Set a cookie and redirect to root
+      // set cookie with token
       res.cookie('nToken', token, { maxAge: 900000, httpOnly: true });
-      res.redirect(`/users/${user._id}`);
-    });
+      res.status(200).json({ message: "User logged in", user, token });
   } catch (err) {
-    console.log(err);
-  };
+      res.status(500).json({ error: err.message })
+  }
 });
 
 // LOGOUT
 router.get('/logout', (req, res) => {
   res.clearCookie('nToken');
-  res.redirect('/');
+  res.status(200).json({ message: "User logged out" });
 });
 
 module.exports = router;
