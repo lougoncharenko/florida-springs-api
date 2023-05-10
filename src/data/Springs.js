@@ -1,4 +1,4 @@
-const springData = [
+[
     { 
         name: "Rainbow Spring", 
         address: '19158 Sw 81St Place Rd Dunnellon, Fl 34432 Marion County',
