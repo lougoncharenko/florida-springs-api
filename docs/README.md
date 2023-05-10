@@ -1,10 +1,16 @@
 # Florida Springs API
 
 ## Purpose of this API
-The purpose of this API is to fetch data related to springs in Florida
+The purpose of this API is to fetch data related to springs in Florida.
 
 ## To use the API
-To use the API please use the sign in route for authentication
+To use the API please use the [sign in route](http://localhost:3000/sign-up) for authentication
+
+## Current Spring Data:
+- Rainbow Spring
+- Weeki Wachee Springs
+- Silver Springs
+- Ichetucknee Springs
 
 ## API Endpoints:
 
@@ -20,22 +26,12 @@ To use the API please use the sign in route for authentication
 
 {springId} = Route parameter = `:springId`
 
-### Users
-
-| Route | Method | Description |
-| ----------- | ----------- | ----------- |
-|http://localhost:3000/users |GET | Gets all users |
-|http://localhost:3000/users/{userId} |GET | Get one user by id|
-|http://localhost:3000/users | POST | add a new user |
-|http://localhost:3000/users/{userId}| PUT | update an exisiting user|
-|http://localhost:3000/users/{userId} | DELETE | delete a user |
-
-{userId} = Route parameter = `:userId`
 
 ### Authentication
 
 | Route | Method | Description |
 | ----------- | ----------- | ----------- |
+|http://localhost:3000/users |GET | Gets all users |
 |http://localhost:3000/sign-up |POST | User signs up for API key |
 |http://localhost:3000//login | POST | User logs in for API key |
 |http://localhost:3000/logout | GET | User logs out of API account |
